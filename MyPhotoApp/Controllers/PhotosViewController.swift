@@ -33,24 +33,12 @@ class PhotosViewController:  UIViewController, UICollectionViewDelegate {
         
         // make saved photos visible before refreshing from Flickr
         updateDataSource()
-        // refresh fromFlickr
-        store.fetchInterestingPhotos {
+        
+        // refresh interesting photos from Flickr   
+        store.fetchPhotos(flickrURL: FlickrAPI.interestingPhotosURL) {
             (photosResult) in
-            
             self.updateDataSource()
         }
-        
-//        store.fetchRecentPhotos { (photosResult) in
-//            switch photosResult {
-//            case let .success(photos):
-//                print("Successfully found \(photos.count) recent photos.")
-//                self.photoDataSource.photos = photos
-//            case let .failure(error):
-//                print("Error fetching recent photos: \(error)")
-//                self.photoDataSource.photos.removeAll()
-//            }
-//            self.collectionView.reloadSections(IndexSet(integer: 0))
-//        }
     }
     
     
@@ -91,7 +79,7 @@ class PhotosViewController:  UIViewController, UICollectionViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
-        case "showPhoto":
+        case Constants.Segue.showPhoto.rawValue:
             if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
                 
                 let photo = photoDataSource.photos[selectedIndexPath.row]

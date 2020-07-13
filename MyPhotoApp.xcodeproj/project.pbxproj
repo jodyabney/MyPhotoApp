@@ -27,6 +27,7 @@
 		B194681224BA8F3D00DCD29A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194681124BA8F3D00DCD29A /* PhotoCollectionViewCell.swift */; };
 		B194681424BA982200DCD29A /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194681324BA982200DCD29A /* ImageStore.swift */; };
 		B194681624BA993E00DCD29A /* PhotoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194681524BA993E00DCD29A /* PhotoInfoViewController.swift */; };
+		B1F7CEE924BBFE42001FD43A /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B1F7CEE824BBFE42001FD43A /* TODO.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		B194681124BA8F3D00DCD29A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		B194681324BA982200DCD29A /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		B194681524BA993E00DCD29A /* PhotoInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInfoViewController.swift; sourceTree = "<group>"; };
+		B1F7CEE824BBFE42001FD43A /* TODO.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TODO.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				B18812CE24BB6467008814AB /* Networking */,
 				B153BC4224BA3DEC004AB124 /* SceneDelegate.swift */,
 				B18812CF24BB6483008814AB /* Views */,
+				B1F7CEE824BBFE42001FD43A /* TODO.rtf */,
 			);
 			path = MyPhotoApp;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1F7CEE924BBFE42001FD43A /* TODO.rtf in Resources */,
 				B153BC5024BA3DEF004AB124 /* LaunchScreen.storyboard in Resources */,
 				B153BC4D24BA3DEF004AB124 /* Assets.xcassets in Resources */,
 				B153BC4824BA3DEC004AB124 /* Main.storyboard in Resources */,

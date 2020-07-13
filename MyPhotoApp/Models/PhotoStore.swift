@@ -27,9 +27,10 @@ class PhotoStore {
     
     //MARK: - Methods
     
-    func fetchInterestingPhotos(completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchPhotos(flickrURL: URL,
+                     completion: @escaping (Result<[Photo], Error>) -> Void) {
         
-        let url = FlickrAPI.interestingPhotosURL
+        let url = flickrURL
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) {
             (data, response, error) in

@@ -51,7 +51,7 @@
                                 <connections>
                                     <outlet property="imageView" destination="NLp-T7-AfP" id="d8a-Xm-rGi"/>
                                     <outlet property="spinner" destination="fH3-JZ-eoc" id="Pyr-aW-zV4"/>
-                                    <segue destination="v35-yv-eR2" kind="show" identifier="showPhoto" id="Xwy-jz-17M"/>
+                                    <segue destination="v35-yv-eR2" kind="show" identifier="SegueShowPhoto" id="Xwy-jz-17M"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
