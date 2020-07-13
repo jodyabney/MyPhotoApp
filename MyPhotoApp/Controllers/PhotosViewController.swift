@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController, UICollectionViewDelegate {
+class PhotosViewController:  UIViewController, UICollectionViewDelegate {
 
     //MARK: - IBOutlets
     
@@ -31,18 +31,13 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
         collectionView.dataSource = photoDataSource
         collectionView.delegate = self
         
+        // make saved photos visible before refreshing from Flickr
+        updateDataSource()
+        // refresh fromFlickr
         store.fetchInterestingPhotos {
             (photosResult) in
             
-            switch photosResult {
-            case let .success(photos):
-                print("Successfully found \(photos.count) photos.")
-                self.photoDataSource.photos = photos
-            case let .failure(error):
-                print("Error fetching interesting photos: \(error)")
-                self.photoDataSource.photos.removeAll()
-            }
-            self.collectionView.reloadSections(IndexSet(integer: 0))
+            self.updateDataSource()
         }
         
 //        store.fetchRecentPhotos { (photosResult) in
@@ -113,3 +108,19 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate {
 
 }
 
+//MARK: - Core Data Methods
+
+extension PhotosViewController {
+    private func updateDataSource() {
+        store.fetchAllPhotos { (photosResult) in
+            
+            switch photosResult {
+            case let .success(photos):
+                self.photoDataSource.photos = photos
+            case .failure:
+                self.photoDataSource.photos.removeAll()
+            }
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+        }
+    }
+}

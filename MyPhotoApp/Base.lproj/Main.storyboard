@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Photorama-->
+        <!--MyPhotoApp-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="PhotosViewController" customModule="MyPhotoApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -56,7 +56,7 @@
                             </collectionViewCell>
                         </cells>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Photorama" id="Rd1-CE-PYD"/>
+                    <navigationItem key="navigationItem" title="MyPhotoApp" id="Rd1-CE-PYD"/>
                     <connections>
                         <outlet property="collectionView" destination="dNX-lS-R4m" id="gnD-G4-u9u"/>
                     </connections>

@@ -9,7 +9,7 @@
 import Foundation
 
 struct FlickrPhotosResponse: Codable {
-    let photos: [Photo]
+    let photos: [FlickrPhoto]
     
     enum CodingKeys: String, CodingKey {
         case photos = "photo"

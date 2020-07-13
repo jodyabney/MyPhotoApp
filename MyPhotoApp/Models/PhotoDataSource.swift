@@ -16,7 +16,6 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
     
     //MARK: - UIColelctionView DataSource Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("photos.count: \(photos.count)")
         return photos.count
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 enum PhotoError: Error {
     case imageCreationError
@@ -33,7 +34,14 @@ class PhotoStore {
         let task = session.dataTask(with: request) {
             (data, response, error) in
             
-            let result = self.processPhotosRequest(data: data, error: error)
+            var result = self.processPhotosRequest(data: data, error: error)
+            if case .success = result {
+                do {
+                    try Constants.context.save()
+                } catch {
+                    result = .failure(error)
+                }
+            }
             OperationQueue.main.addOperation {
                 completion(result)
             }
@@ -63,13 +71,44 @@ class PhotoStore {
             return .failure(error!)
         }
         
-        return FlickrAPI.photos(fromJSON: jsonData)
+        switch FlickrAPI.photos(fromJSON: jsonData) {
+        case let .success(flickrPhotos):
+            let photos = flickrPhotos.map { flickrPhoto -> Photo in
+                
+                let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+                let predicate = NSPredicate(format: "\(#keyPath(Photo.photoID)) == \(flickrPhoto.photoID)"
+                )
+                fetchRequest.predicate = predicate
+                var fetchedPhotos: [Photo]?
+                Constants.context.performAndWait {
+                    fetchedPhotos = try? fetchRequest.execute()
+                }
+                if let existingPhoto = fetchedPhotos?.first {
+                    return existingPhoto
+                }
+                
+                var photo: Photo!
+                Constants.context.performAndWait {
+                    photo = Photo(context: Constants.context)
+                    photo.title = flickrPhoto.title
+                    photo.photoID = flickrPhoto.photoID
+                    photo.remoteURL = flickrPhoto.remoteURL
+                    photo.dateTaken = flickrPhoto.dateTaken
+                }
+                return photo
+            }
+            return .success(photos)
+        case let .failure(error):
+            return .failure(error)
+        }
     }
     
     func fetchImage(for photo: Photo,
                     completion: @escaping (Result<UIImage, Error>) -> Void) {
         
-        let photoKey = photo.photoID
+        guard let photoKey = photo.photoID else {
+            preconditionFailure("Photo expected to have a photoID.")
+        }
         if let image = imageStore.image(forKey: photoKey) {
             OperationQueue.main.addOperation {
                 completion(.success(image))
@@ -116,4 +155,23 @@ class PhotoStore {
         return .success(image)
     }
     
+}
+
+extension PhotoStore {
+    
+    func fetchAllPhotos(completion: @escaping (Result<[Photo], Error>) -> Void) {
+        
+        let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
+        let sortByDateTaken = NSSortDescriptor(key: #keyPath(Photo.dateTaken), ascending: true)
+        fetchRequest.sortDescriptors = [sortByDateTaken]
+        
+        Constants.context.perform {
+            do {
+                let allPhotos = try Constants.context.fetch(fetchRequest)
+                completion(.success(allPhotos))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
 }
