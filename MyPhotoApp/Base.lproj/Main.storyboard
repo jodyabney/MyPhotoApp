@@ -18,13 +18,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="ici-as-uOh">
                             <size key="itemSize" width="90" height="90"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCollectionViewCell" id="nkR-7t-HLp" customClass="PhotoCollectionViewCell" customModule="MyPhotoApp" customModuleProvider="target">
-                                <rect key="frame" x="2" y="2" width="90" height="90"/>
+                                <rect key="frame" x="2" y="52" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ccY-60-x6c">
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -55,6 +55,32 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="PhotoCollectionHeaderView" id="uYb-0C-XUh" customClass="PhotoCollectionHeaderView" customModule="MyPhotoApp" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MP8-xY-Zv6">
+                                    <rect key="frame" x="8" y="8" width="398" height="35"/>
+                                    <segments>
+                                        <segment title="Interestingness"/>
+                                        <segment title="Popular"/>
+                                        <segment title="Recent"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="photoSegmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="a54-G1-ETZ"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="MP8-xY-Zv6" firstAttribute="top" secondItem="uYb-0C-XUh" secondAttribute="topMargin" id="Geu-rR-SRU"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="MP8-xY-Zv6" secondAttribute="bottom" id="L5D-Uq-LCt"/>
+                                <constraint firstItem="MP8-xY-Zv6" firstAttribute="leading" secondItem="uYb-0C-XUh" secondAttribute="leadingMargin" id="S7O-ij-uKv"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="MP8-xY-Zv6" secondAttribute="trailing" id="r6p-sq-xfX"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="photoTypeSegmentedControl" destination="MP8-xY-Zv6" id="cVy-A7-eT5"/>
+                            </connections>
+                        </collectionReusableView>
                     </collectionView>
                     <navigationItem key="navigationItem" title="MyPhotoApp" id="Rd1-CE-PYD"/>
                     <connections>

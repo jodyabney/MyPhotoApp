@@ -24,11 +24,24 @@ class PhotoStore {
     }()
     let imageStore = ImageStore()
     
+    var urlType: String = Constants.URLType.interestingPhotos.rawValue
+    
     
     //MARK: - Methods
     
     func fetchPhotos(flickrURL: URL,
                      completion: @escaping (Result<[Photo], Error>) -> Void) {
+        
+        switch flickrURL {
+        case FlickrAPI.interestingPhotosURL:
+            urlType = Constants.URLType.interestingPhotos.rawValue
+        case FlickrAPI.popularPhotosURL:
+            urlType = Constants.URLType.popularPhotos.rawValue
+        case FlickrAPI.recentPhotosURL:
+            urlType = Constants.URLType.recentPhotos.rawValue
+        default:
+            break
+        }
         
         let url = flickrURL
         let request = URLRequest(url: url)
@@ -43,21 +56,6 @@ class PhotoStore {
                     result = .failure(error)
                 }
             }
-            OperationQueue.main.addOperation {
-                completion(result)
-            }
-        }
-        task.resume()
-    }
-    
-    func fetchRecentPhotos(completion: @escaping (Result<[Photo], Error>) -> Void) {
-        
-        let url = FlickrAPI.recentPhotosURL
-        let request = URLRequest(url: url)
-        let task = session.dataTask(with: request) {
-            (data, response, error) in
-            
-            let result = self.processPhotosRequest(data: data, error: error)
             OperationQueue.main.addOperation {
                 completion(result)
             }
@@ -85,7 +83,9 @@ class PhotoStore {
                     fetchedPhotos = try? fetchRequest.execute()
                 }
                 if let existingPhoto = fetchedPhotos?.first {
-                    return existingPhoto
+                    if existingPhoto.urlType == urlType {
+                        return existingPhoto
+                    }
                 }
                 
                 var photo: Photo!
@@ -95,6 +95,7 @@ class PhotoStore {
                     photo.photoID = flickrPhoto.photoID
                     photo.remoteURL = flickrPhoto.remoteURL
                     photo.dateTaken = flickrPhoto.dateTaken
+                    photo.urlType = self.urlType
                 }
                 return photo
             }
@@ -160,7 +161,7 @@ class PhotoStore {
 
 extension PhotoStore {
     
-    func fetchAllPhotos(completion: @escaping (Result<[Photo], Error>) -> Void) {
+    func fetchAllPhotos(urlType: String, completion: @escaping (Result<[Photo], Error>) -> Void) {
         
         let fetchRequest: NSFetchRequest<Photo> = Photo.fetchRequest()
         let sortByDateTaken = NSSortDescriptor(key: #keyPath(Photo.dateTaken), ascending: true)
@@ -169,7 +170,10 @@ extension PhotoStore {
         Constants.context.perform {
             do {
                 let allPhotos = try Constants.context.fetch(fetchRequest)
-                completion(.success(allPhotos))
+                let filteredPhotos = allPhotos.filter { (photo) -> Bool in
+                    return photo.urlType == self.urlType
+                }
+                completion(.success(filteredPhotos))
             } catch {
                 completion(.failure(error))
             }

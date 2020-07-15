@@ -11,10 +11,7 @@ import UIKit
 class PhotosViewController:  UIViewController, UICollectionViewDelegate {
 
     //MARK: - IBOutlets
-    
     @IBOutlet var collectionView: UICollectionView!
-    
-    
     
     //MARK: - Properties
     
@@ -32,12 +29,12 @@ class PhotosViewController:  UIViewController, UICollectionViewDelegate {
         collectionView.delegate = self
         
         // make saved photos visible before refreshing from Flickr
-        updateDataSource()
+        updateDataSource(urlType: Constants.URLType.interestingPhotos.rawValue)
         
         // refresh interesting photos from Flickr   
         store.fetchPhotos(flickrURL: FlickrAPI.interestingPhotosURL) {
             (photosResult) in
-            self.updateDataSource()
+            self.updateDataSource(urlType: Constants.URLType.interestingPhotos.rawValue)
         }
     }
     
@@ -48,6 +45,31 @@ class PhotosViewController:  UIViewController, UICollectionViewDelegate {
     
     //MARK: - IBActions
     
+    @IBAction func photoSegmentChanged(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+        case 0: // Interestingness
+            store.fetchPhotos(flickrURL: FlickrAPI.interestingPhotosURL) {
+                (photosResult) in
+                self.updateDataSource(urlType: Constants.URLType.interestingPhotos.rawValue)
+            }
+            sender.selectedSegmentIndex = 0
+        case 1: // Popular
+            store.fetchPhotos(flickrURL: FlickrAPI.popularPhotosURL) {
+                (photosResult) in
+                self.updateDataSource(urlType: Constants.URLType.popularPhotos.rawValue)
+            }
+            sender.selectedSegmentIndex = 1
+        case 2: // Recent
+            store.fetchPhotos(flickrURL: FlickrAPI.recentPhotosURL) {
+                (photosResult) in
+                self.updateDataSource(urlType: Constants.URLType.recentPhotos.rawValue)
+            }
+            sender.selectedSegmentIndex = 2
+        default:
+            break
+        }
+    }
     
     //MARK: - UICollectionView Delegate Methods
     
@@ -99,8 +121,8 @@ class PhotosViewController:  UIViewController, UICollectionViewDelegate {
 //MARK: - Core Data Methods
 
 extension PhotosViewController {
-    private func updateDataSource() {
-        store.fetchAllPhotos { (photosResult) in
+    private func updateDataSource(urlType: String) {
+        store.fetchAllPhotos(urlType: urlType) { (photosResult) in
             
             switch photosResult {
             case let .success(photos):

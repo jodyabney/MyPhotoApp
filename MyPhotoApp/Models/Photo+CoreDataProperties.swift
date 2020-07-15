@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  MyPhotoApp
 //
-//  Created by Jody Abney on 7/12/20.
+//  Created by Jody Abney on 7/13/20.
 //  Copyright © 2020 AbneyAnalytics. All rights reserved.
 //
 //
@@ -17,9 +17,10 @@ extension Photo {
         return NSFetchRequest<Photo>(entityName: "Photo")
     }
 
-    @NSManaged public var photoID: String?
-    @NSManaged public var title: String?
     @NSManaged public var dateTaken: Date?
+    @NSManaged public var photoID: String?
     @NSManaged public var remoteURL: URL?
+    @NSManaged public var title: String?
+    @NSManaged public var urlType: String?
 
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		B1384AED24BBE8E6007177FF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1384AEC24BBE8E6007177FF /* Constants.swift */; };
 		B1384AF024BBE992007177FF /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1384AEE24BBE992007177FF /* Photo+CoreDataClass.swift */; };
-		B1384AF124BBE992007177FF /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1384AEF24BBE992007177FF /* Photo+CoreDataProperties.swift */; };
 		B153BC4124BA3DEC004AB124 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153BC4024BA3DEC004AB124 /* AppDelegate.swift */; };
 		B153BC4324BA3DEC004AB124 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153BC4224BA3DEC004AB124 /* SceneDelegate.swift */; };
 		B153BC4524BA3DEC004AB124 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B153BC4424BA3DEC004AB124 /* PhotosViewController.swift */; };
@@ -27,7 +26,9 @@
 		B194681224BA8F3D00DCD29A /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194681124BA8F3D00DCD29A /* PhotoCollectionViewCell.swift */; };
 		B194681424BA982200DCD29A /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194681324BA982200DCD29A /* ImageStore.swift */; };
 		B194681624BA993E00DCD29A /* PhotoInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B194681524BA993E00DCD29A /* PhotoInfoViewController.swift */; };
+		B1C29D4324BE44A4000FF3FC /* PhotoCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1C29D4224BE44A4000FF3FC /* PhotoCollectionHeaderView.swift */; };
 		B1F7CEE924BBFE42001FD43A /* TODO.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B1F7CEE824BBFE42001FD43A /* TODO.rtf */; };
+		B1F7CEEB24BD1506001FD43A /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F7CEEA24BD1506001FD43A /* Photo+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +44,6 @@
 /* Begin PBXFileReference section */
 		B1384AEC24BBE8E6007177FF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B1384AEE24BBE992007177FF /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B1384AEF24BBE992007177FF /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B153BC3D24BA3DEC004AB124 /* MyPhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B153BC4024BA3DEC004AB124 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B153BC4224BA3DEC004AB124 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +65,9 @@
 		B194681124BA8F3D00DCD29A /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		B194681324BA982200DCD29A /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		B194681524BA993E00DCD29A /* PhotoInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInfoViewController.swift; sourceTree = "<group>"; };
+		B1C29D4224BE44A4000FF3FC /* PhotoCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B1F7CEE824BBFE42001FD43A /* TODO.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = TODO.rtf; sourceTree = "<group>"; };
+		B1F7CEEA24BD1506001FD43A /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +140,7 @@
 		B18812CC24BB642A008814AB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B1384AEF24BBE992007177FF /* Photo+CoreDataProperties.swift */,
+				B1F7CEEA24BD1506001FD43A /* Photo+CoreDataProperties.swift */,
 				B153BC6724BA4226004AB124 /* PhotoStore.swift */,
 				B153BC6924BA4542004AB124 /* FlickrPhoto.swift */,
 				B194680F24BA54EF00DCD29A /* PhotoDataSource.swift */,
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				B194681124BA8F3D00DCD29A /* PhotoCollectionViewCell.swift */,
+				B1C29D4224BE44A4000FF3FC /* PhotoCollectionHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,8 +281,10 @@
 				B1384AF024BBE992007177FF /* Photo+CoreDataClass.swift in Sources */,
 				B153BC6A24BA4542004AB124 /* FlickrPhoto.swift in Sources */,
 				B153BC6C24BA45BB004AB124 /* FlickrResponse.swift in Sources */,
+				B1C29D4324BE44A4000FF3FC /* PhotoCollectionHeaderView.swift in Sources */,
 				B153BC4B24BA3DEC004AB124 /* MyPhotoApp.xcdatamodeld in Sources */,
 				B194681024BA54EF00DCD29A /* PhotoDataSource.swift in Sources */,
+				B1F7CEEB24BD1506001FD43A /* Photo+CoreDataProperties.swift in Sources */,
 				B194681624BA993E00DCD29A /* PhotoInfoViewController.swift in Sources */,
 				B153BC6E24BA45FC004AB124 /* FlickrPhotosResponse.swift in Sources */,
 				B153BC4524BA3DEC004AB124 /* PhotosViewController.swift in Sources */,
@@ -289,7 +294,6 @@
 				B194681224BA8F3D00DCD29A /* PhotoCollectionViewCell.swift in Sources */,
 				B1384AED24BBE8E6007177FF /* Constants.swift in Sources */,
 				B153BC6624BA3EF5004AB124 /* FlickrAPI.swift in Sources */,
-				B1384AF124BBE992007177FF /* Photo+CoreDataProperties.swift in Sources */,
 				B194681424BA982200DCD29A /* ImageStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

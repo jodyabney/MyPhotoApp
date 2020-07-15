@@ -14,11 +14,21 @@ enum Constants {
     enum EndPoint: String {
         case interestingPhotos = "flickr.interestingness.getList"
         case recentPhotos = "flickr.photos.getRecent"
-        case popularPhotos = "flickr.stats.getPopularPhotos"
+        case popularPhotos = "flickr.photos.getPopular"
     }
     
     enum Segue: String {
         case showPhoto = "SegueShowPhoto"
+    }
+    
+    enum SupplementaryElement: String {
+        case collectionSectionHeader = "PhotoCollectionHeaderView"
+    }
+    
+    enum URLType: String {
+        case interestingPhotos = "interestingness"
+        case popularPhotos = "popular"
+        case recentPhotos = "recent"
     }
     
     // set up the core data references

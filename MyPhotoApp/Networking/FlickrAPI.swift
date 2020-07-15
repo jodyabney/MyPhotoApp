@@ -12,7 +12,8 @@ struct FlickrAPI {
     
     //MARK: - Properties
     private static let baseURLString = "https://api.flickr.com/services/rest"
-    private static let apiKey = "eeeb1f70e2b397eaf6283d8bd2e95ddb"
+//    private static let apiKey = "eeeb1f70e2b397eaf6283d8bd2e95ddb"
+    private static let apiKey = "d25e121b10fb39e8da79a24665ccf2c9"
     
     static var interestingPhotosURL: URL {
         return flickrURL(endPoint: .interestingPhotos,

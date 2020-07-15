@@ -14,12 +14,27 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
     var photos = [Photo]()
     
     
-    //MARK: - UIColelctionView DataSource Methods
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    //MARK: - UICollectionView DataSource Methods
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        if (kind == UICollectionView.elementKindSectionHeader) {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                             withReuseIdentifier: Constants.SupplementaryElement.collectionSectionHeader.rawValue,
+                                                                             for: indexPath)
+            // Customize headerView here
+            return headerView
+        }
+        fatalError()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         return photos.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let identifier = "PhotoCollectionViewCell"
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier,
